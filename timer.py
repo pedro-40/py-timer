@@ -1,14 +1,14 @@
 import time
 import pygame
-from os import system ,name,chdir
+import os
 from colorama import Fore 
 
 while True:
 
-    if name=="nt":
-        system("cls")
+    if os.name=="nt":
+       os.system("cls")
     else:
-        system("clear")
+        os.system("clear")
 
     choice=input(Fore.RED+"Do you want to start the timer? (y/n)" )
     if 'y' == choice.lower():
@@ -21,10 +21,10 @@ while True:
         if h < 0 or m < 0 or s < 0:
             print(Fore.RED+"please enter a positive number...")
             time.sleep(5)
-            if name=="nt":
-                system("cls")
+            if os.name=="nt":
+                os.system("cls")
             else:
-                system("clear")
+                os.system("clear")
             continue
         
         if s >= 60:
@@ -41,19 +41,19 @@ while True:
         print("The timer starts after 10 seconds. :)")
         time.sleep(10)
         while total > 0 :
-            if name =="nt":
-                system("cls")
+            if os.name =="nt":
+                os.system("cls")
             else:
-                system("clear")            
+                os.system("clear")            
             print(Fore.MAGENTA+f"secondes :{total}")
             total -= 1
             time.sleep(1)
         while total == 0 :
-            if name =="nt":
-                system("cls")
+            if os.name =="nt":
+                os.system("cls")
             else:
-                system("clear") 
-            chdir(i)
+                os.system("clear") 
+            os.chdir(i)
             pygame.mixer.init()
             sound=pygame.mixer.Sound(M)
             sound.play()
@@ -63,16 +63,16 @@ while True:
                 break
               
     elif 'n' == choice.lower() :
-        if name=="nt":
-            system("cls")
+        if os.name=="nt":
+            os.system("cls")
         else:
-            system("clear")
+            os.system("clear")
         break
     
     else:
         print("this choice is not in choices ... ")
         time.sleep(5)
-        if name=="nt":
-            system("cls")
+        if os.name=="nt":
+            os.system("cls")
         else:
-            system("clear")
+            os.system("clear")
