@@ -12,11 +12,13 @@ while True:
 
     choice=input(Fore.RED+"Do you want to start the timer? (y/n)" )
     if 'y' == choice.lower():
-        h=int(input(Fore.GREEN+"how many hours... "))
-        m=int(input("a few minutes... "))
-        s=int(input("a few seconds..."))
-        i=input("enter music directory...")
-        M=input("music name ...")
+        h=int(input(Fore.GREEN+"how many hours... / "))
+        m=int(input("a few minutes... / "))
+        s=int(input("a few seconds... /"))
+        alarm=input("Do you want to set an alarm?(y/n) ")
+        if alarm.lower()=="y" :
+            i=input("enter music directory... /")
+            M=input("music name ... /")
 
         if h < 0 or m < 0 or s < 0:
             print(Fore.RED+"please enter a positive number...")
@@ -48,7 +50,7 @@ while True:
             print(Fore.MAGENTA+f"secondes :{total}")
             total -= 1
             time.sleep(1)
-        while total == 0 :
+        while total == 0 and alarm.lower()=="y":
             if os.name =="nt":
                 os.system("cls")
             else:
@@ -57,8 +59,8 @@ while True:
             pygame.mixer.init()
             sound=pygame.mixer.Sound(M)
             sound.play()
-            e=input(Fore.BLUE+"for off enter y ...")
-            if "y"==e.lower() :
+            for_off=input(Fore.BLUE+"for off enter y ... /")
+            if "y"==for_off.lower() :
                 pygame.mixer.quit()
                 break
               
@@ -70,7 +72,7 @@ while True:
         break
     
     else:
-        print("this choice is not in choices ... ")
+        print("this choice is not in choices ... /")
         time.sleep(5)
         if os.name=="nt":
             os.system("cls")
