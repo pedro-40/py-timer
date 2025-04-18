@@ -1,6 +1,7 @@
+import os
 import time
 import pygame
-import os
+import requests
 from colorama import Fore 
 
 while True:
@@ -15,11 +16,7 @@ while True:
         h=int(input(Fore.GREEN+"how many hours... / "))
         m=int(input("a few minutes... / "))
         s=int(input("a few seconds... /"))
-        alarm=input("Do you want to set an alarm?(y/n) ")
-        if alarm.lower()=="y" :
-            i=input("enter music directory... /")
-            M=input("music name ... /")
-
+    
         if h < 0 or m < 0 or s < 0:
             print(Fore.RED+"please enter a positive number...")
             time.sleep(5)
@@ -38,6 +35,20 @@ while True:
             e= m // 60
             h += e
             m = m -(e*60)
+
+
+        alarm=input("Do you want to set an alarm?(y/n) ")
+        if alarm.lower()=="y" :
+            folder_list=os.listdir()
+            
+            if "my-alarms" not in folder_list:
+                os.mkdir("my-alarms")
+            
+            
+            i=input("enter music directory... /")
+            M=input("music name ... /")
+
+
         print(Fore.CYAN+f"{h} hours : {m} minutes : {s} seconds")
         total=h*3600+m*60+s
         print("The timer starts after 10 seconds. :)")
