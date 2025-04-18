@@ -43,7 +43,24 @@ while True:
             
             if "my-alarms" not in folder_list:
                 os.mkdir("my-alarms")
-            
+            default_alarm = os.listdir()
+
+
+            if "beep1.mp3" not in default_alarm:
+                url_download = "https://sedatoseda.com/wp-content/uploads/Cuckoo-Clock-Alarm-Sound.mp3"
+
+                request = requests.get(url_download)
+
+                if request.status_code == 200 :
+                    os.chdir("my-alarms")
+
+                    with open('file.mp3', 'wb') as f:
+                        
+                        for chunk in request.iter_content(chunk_size=1024):  
+                            f.write(chunk)
+
+
+
             
             i=input("enter music directory... /")
             M=input("music name ... /")
