@@ -54,8 +54,8 @@ while True:
                 if request.status_code == 200 :
                     os.chdir("my-alarms")
 
-                    with open('file.mp3', 'wb') as f:
-                        
+                    with open('beep1.mp3', 'wb') as f:
+
                         for chunk in request.iter_content(chunk_size=1024):  
                             f.write(chunk)
 
