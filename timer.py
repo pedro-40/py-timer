@@ -4,13 +4,17 @@ import pygame
 import requests
 from colorama import Fore 
 
-while True:
+def clear():
 
     if os.name=="nt":
        os.system("cls")
     else:
         os.system("clear")
-        print(Fore.BLUE +"""
+
+
+def banner():
+                
+    print(Fore.BLUE +"""
              _   _                     
  _ __  _   _| |_(_)_ __ ___   ___ _ __ 
 | '_ \| | | | __| | '_ ` _ \ / _ \ '__|
@@ -19,6 +23,12 @@ while True:
 |_|    |___/  
 
 """)
+
+while True:
+
+    clear()
+
+    banner()
 
     choice=input(Fore.RED+"Do you want to start the timer? (y/n)" )
     if 'y' == choice.lower():
@@ -29,11 +39,10 @@ while True:
         if h < 0 or m < 0 or s < 0:
             print(Fore.RED+"please enter a positive number...")
             time.sleep(5)
-            if os.name=="nt":
-                os.system("cls")
-            else:
-                os.system("clear")
-            continue
+
+            clear()
+
+            banner()
         
         if s >= 60:
             w = s // 60
@@ -80,18 +89,19 @@ while True:
         print("The timer starts after 10 seconds. :)")
         time.sleep(10)
         while total > 0 :
-            if os.name =="nt":
-                os.system("cls")
-            else:
-                os.system("clear")            
+
+            clear()
+            banner()
+
             print(Fore.MAGENTA+f"secondes :{total}")
             total -= 1
             time.sleep(1)
         while total == 0 and alarm.lower()=="y":
-            if os.name =="nt":
-                os.system("cls")
-            else:
-                os.system("clear") 
+
+            clear()
+
+            banner()
+
             os.chdir(i)
             pygame.mixer.init()
             sound=pygame.mixer.Sound(M)
@@ -102,16 +112,11 @@ while True:
                 break
               
     elif 'n' == choice.lower() :
-        if os.name=="nt":
-            os.system("cls")
-        else:
-            os.system("clear")
+        clear()
         break
     
     else:
         print("this choice is not in choices ... /")
         time.sleep(5)
-        if os.name=="nt":
-            os.system("cls")
-        else:
-            os.system("clear")
+        clear()
+        banner()
