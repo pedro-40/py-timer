@@ -32,11 +32,11 @@ while True:
 
     choice=input(Fore.RED+"Do you want to start the timer? (y/n)" )
     if 'y' == choice.lower():
-        h=int(input(Fore.GREEN+"how many hours... / "))
-        m=int(input("a few minutes... / "))
-        s=int(input("a few seconds... /"))
+        hour = int(input(Fore.GREEN+"how many hours... / "))
+        minutes = int(input("a few minutes... / "))
+        seconds = int(input("a few seconds... /"))
     
-        if h < 0 or m < 0 or s < 0:
+        if hour < 0 or minutes < 0 or seconds < 0:
             print(Fore.RED+"please enter a positive number...")
             time.sleep(5)
 
@@ -44,15 +44,15 @@ while True:
 
             banner()
         
-        if s >= 60:
-            w = s // 60
-            m += w
-            s= s - (w*60)
+        if seconds >= 60:
+            w = seconds // 60
+            minutes += w
+            seconds = seconds - (w*60)
       
-        if m >= 60:
-            e= m // 60
-            h += e
-            m = m -(e*60)
+        if minutes >= 60:
+            e= minutes // 60
+            hour += e
+            minutes = minutes -(e*60)
 
 
         alarm=input("Do you want to set an alarm?(y/n) ")
@@ -84,19 +84,22 @@ while True:
             M=input("music name ... /")
 
 
-        print(Fore.CYAN+f"{h} hours : {m} minutes : {s} seconds")
-        total=h*3600+m*60+s
+        print(Fore.CYAN+f"{hour} hours : {minutes} minutes : {seconds} seconds")
+
+        total_time = hour*3600+minutes*60+seconds
+
         print("The timer starts after 10 seconds. :)")
         time.sleep(10)
-        while total > 0 :
+        while total_time > 0 :
 
             clear()
             banner()
 
-            print(Fore.MAGENTA+f"secondes :{total}")
-            total -= 1
+            print(Fore.MAGENTA+f"secondes :{total_time}")
+            total_time -= 1
             time.sleep(1)
-        while total == 0 and alarm.lower()=="y":
+
+        while total_time == 0 and alarm.lower()=="y":
 
             clear()
 
@@ -110,10 +113,14 @@ while True:
             if "y"==for_off.lower() :
                 pygame.mixer.quit()
                 break
+
+
               
     elif 'n' == choice.lower() :
         clear()
         break
+
+
     
     else:
         print("this choice is not in choices ... /")
