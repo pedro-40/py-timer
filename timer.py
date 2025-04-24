@@ -10,6 +10,15 @@ while True:
        os.system("cls")
     else:
         os.system("clear")
+        print(Fore.BLUE +"""
+             _   _                     
+ _ __  _   _| |_(_)_ __ ___   ___ _ __ 
+| '_ \| | | | __| | '_ ` _ \ / _ \ '__|
+| |_) | |_| | |_| | | | | | |  __/ |   
+| .__/ \__, |\__|_|_| |_| |_|\___|_|   
+|_|    |___/  
+
+""")
 
     choice=input(Fore.RED+"Do you want to start the timer? (y/n)" )
     if 'y' == choice.lower():
