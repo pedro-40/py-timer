@@ -77,11 +77,41 @@ while True:
                         for chunk in request.iter_content(chunk_size=1024):  
                             f.write(chunk)
 
+            alarm_choice = input("Do you want to sing a song?(y/n)   ")
+
+            if alarm_choice.lower() == "n":
+                
+
+                M ="beep1.mp3"
+
+            if alarm_choice.lower() == "y" :
+
+                song_copy = input("Do you want me to list the names of the songs?  (y/n)  ")
+
+                if song_copy.lower() == "y" :
+
+                    you = os.path.expanduser("~")
+                    music_directory = os.path.join(you, "Music")
+                    os.chdir(music_directory)
 
 
-            
-            i=input("enter music directory... /")
-            M=input("music name ... /")
+                    m = os.listdir()
+
+                    for i in m :
+                        print (i)
+
+                    cp_song = input("Enter the name of the song you want.   ")
+                    
+                    if cp_song in m :
+
+                        if os.name == "nt" :
+
+                            os.system(f"copy {m}")
+                            os.chdir("../my-alarms")
+                            os.system(f"paste {m}")
+                        else:
+                            os.system(f'cp {m} ../my-alarms')
+                            
 
 
         print(Fore.CYAN+f"{hour} hours : {minutes} minutes : {seconds} seconds")
@@ -104,15 +134,15 @@ while True:
             clear()
 
             banner()
-
-            os.chdir(i)
-            pygame.mixer.init()
-            sound=pygame.mixer.Sound(M)
-            sound.play()
-            for_off=input(Fore.BLUE+"for off enter y ... /")
-            if "y"==for_off.lower() :
-                pygame.mixer.quit()
-                break
+            while True :
+                os.chdir("../my-alarms")
+                pygame.mixer.init()
+                sound=pygame.mixer.Sound(M)
+                sound.play()
+                for_off=input(Fore.BLUE+"for off enter y ... /")
+                if "y"==for_off.lower() :
+                    pygame.mixer.quit()
+                    break
 
 
               
