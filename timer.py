@@ -4,15 +4,13 @@ import pygame
 import requests
 from colorama import Fore 
 
+
 def clear():
 
     if os.name=="nt":
        os.system("cls")
     else:
         os.system("clear")
-
-
-def banner():
                 
     print(Fore.BLUE +"""
              _   _                     
@@ -22,138 +20,189 @@ def banner():
 | .__/ \__, |\__|_|_| |_| |_|\___|_|   
 |_|    |___/  
 
-""")
+"""+Fore.RESET)
+    
+def choice() :
+
+    while True :
+
+        choice = input(Fore.BLUE+"DO you want to start timer ?  (Y,n) ")
+        if (
+            choice.lower()=="y" or 
+            choice=="") :
+
+            time_set()
+
+        elif choice.lower()=="n" :
+
+            exit()
+
+        else :
+            print(Fore.RED+"this choice is not in choices " )
+            time.sleep(3)
+            clear()
+    
+    choice()
+
+
+    
+
+
+def time_set():
+
+    time = list(input(Fore.BLUE+"Enter Time in HH:MM:SS format : "+Fore.RESET).split(":"))
+
+    try:
+
+        for i in range(len(time)) : time[i] = int(time[i])
+
+    except :
+
+        print(Fore.RED+"Entered Time is invalid\nExample valid time : 12:36:00\n"+Fore.RESET)
+        return time_set()
+
+
+    def time_format (time) :
+
+        if len(time) != 3 :
+            print(Fore.RED+"Entered Time is invalid\nExample valid time : 12:36:00\n"+Fore.RESET)
+            return time_set() 
+        
+        if (
+
+            time[0] < 0 or
+            time[1] < 0 or
+            time[2] < 0 
+        ):
+            print(Fore.RED+"Entered Time is invalid\nExample valid time : 12:36:00\n"+Fore.RESET)
+            return time_set() 
+        
+        if (
+
+            time[1] > 60 or
+            time[2] > 60 
+        ):
+            print(Fore.RED+"Entered Time is invalid\nExample valid time : 12:36:00\n"+Fore.RESET)
+            return time_set()
+
+    time_format(time)
+
+    clear()
+
+    print(Fore.BLUE+f"The time you set : {time[0]}:{time[1]}:{time[2]}"+Fore.RESET)
+
+    return time
+
 
 while True:
 
     clear()
 
-    banner()
+    choice()
 
-    choice=input(Fore.RED+"Do you want to start the timer? (y/n)" )
-    if 'y' == choice.lower():
-        hour = int(input(Fore.GREEN+"how many hours... / "))
-        minutes = int(input("a few minutes... / "))
-        seconds = int(input("a few seconds... /"))
-    
-        if hour < 0 or minutes < 0 or seconds < 0:
-            print(Fore.RED+"please enter a positive number...")
-            time.sleep(5)
-
-            clear()
-
-            banner()
-        
-        if seconds >= 60:
-            w = seconds // 60
-            minutes += w
-            seconds = seconds - (w*60)
-      
-        if minutes >= 60:
-            e= minutes // 60
-            hour += e
-            minutes = minutes -(e*60)
-
-
-        alarm=input("Do you want to set an alarm?(y/n) ")
-        if alarm.lower()=="y" :
-            folder_list=os.listdir()
-            
-            if "my-alarms" not in folder_list:
-                os.mkdir("my-alarms")
-            default_alarm = os.listdir()
-
-
-            if "beep1.mp3" not in default_alarm:
-                url_download = "https://sedatoseda.com/wp-content/uploads/Cuckoo-Clock-Alarm-Sound.mp3"
-
-                request = requests.get(url_download)
-
-                if request.status_code == 200 :
-                    os.chdir("my-alarms")
-
-                    with open('beep1.mp3', 'wb') as f:
-
-                        for chunk in request.iter_content(chunk_size=1024):  
-                            f.write(chunk)
-
-            alarm_choice = input("Do you want to sing a song?(y/n)   ")
-
-            if alarm_choice.lower() == "n":
-                
-
-                M ="beep1.mp3"
-
-            if alarm_choice.lower() == "y" :
-
-                song_copy = input("Do you want me to list the names of the songs?  (y/n)  ")
-
-                if song_copy.lower() == "y" :
-
-                    you = os.path.expanduser("~")
-                    music_directory = os.path.join(you, "Music")
-                    os.chdir(music_directory)
-
-
-                    m = os.listdir()
-
-                    for i in m :
-                        print (i)
-
-                    cp_song = input("Enter the name of the song you want.   ")
-                    
-                    if cp_song in m :
-
-                        if os.name == "nt" :
-
-                            os.system(f"copy {m}")
-                            os.chdir("../my-alarms")
-                            os.system(f"paste {m}")
-                        else:
-                            os.system(f'cp {m} ../my-alarms')
+    #choice=input(Fore.RED+"Do you want to start the timer? (y/n)" )
+    #if 'y' == choice.lower():
+    #    time_set()
+       
+        #alarm=input("Do you want to set an alarm?(y/n) ")
+        #if alarm.lower()=="y" :
+        #    folder_list=os.listdir()
+        #    
+        #    if "my-alarms" not in folder_list:
+        #        os.mkdir("my-alarms")
+        #    default_alarm = os.listdir()
+#
+#
+        #    if "beep1.mp3" not in default_alarm:
+        #        url_download = "https://sedatoseda.com/wp-content/uploads/Cuckoo-Clock-Alarm-Sound.mp3"
+#
+        #        request = requests.get(url_download)
+#
+        #        if request.status_code == 200 :
+        #            os.chdir("my-alarms")
+#
+        #            with open('beep1.mp3', 'wb') as f:
+#
+        #                for chunk in request.iter_content(chunk_size=1024):  
+        #                    f.write(chunk)
+#
+        #    alarm_choice = input("Do you want to sing a song?(y/n)   ")
+#
+        #    if alarm_choice.lower() == "n":
+        #        
+#
+        #        M ="beep1.mp3"
+#
+        #    if alarm_choice.lower() == "y" :
+#
+        #        song_copy = input("Do you want me to list the names of the songs?  (y/n)  ")
+#
+        #        if song_copy.lower() == "y" :
+#
+        #            you = os.path.expanduser("~")
+        #            music_directory = os.path.join(you, "Music")
+        #            os.chdir(music_directory)
+#
+#
+        #            m = os.listdir()
+#
+        #            for i in m :
+        #                print (i)
+#
+        #            cp_song = input("Enter the name of the song you want.   ")
+        #            
+        #            if cp_song in m :
+#
+        #                if os.name == "nt" :
+#
+        #                    os.system(f"copy {m}")
+        #                    os.chdir("../my-alarms")
+        #                    os.system(f"paste {m}")
+        #                else:
+        #                    os.system(f'cp {m} ../my-alarms')
                             
 
 
-        print(Fore.CYAN+f"{hour} hours : {minutes} minutes : {seconds} seconds")
-
-        total_time = hour*3600+minutes*60+seconds
-
-        print("The timer starts after 10 seconds. :)")
-        time.sleep(10)
-        while total_time > 0 :
-
-            clear()
-            banner()
-
-            print(Fore.MAGENTA+f"secondes :{total_time}")
-            total_time -= 1
-            time.sleep(1)
-
-        while total_time == 0 and alarm.lower()=="y":
-
-            clear()
-
-            banner()
-            while True :
-                os.chdir("../my-alarms")
-                pygame.mixer.init()
-                sound=pygame.mixer.Sound(M)
-                sound.play()
-                for_off=input(Fore.BLUE+"for off enter y ... /")
-                if "y"==for_off.lower() :
-                    pygame.mixer.quit()
-                    break
-
+       # print(Fore.CYAN+f"{hour} hours : {minutes} minutes : {seconds} seconds")
+#
+       # total_time = hour*3600+minutes*60+seconds
+#
+       # print("The timer starts after 10 seconds. :)")
+       # time.sleep(10)
+       # while total_time > 0 :
+#
+       #     clear()
+       #     
+#
+       #     print(Fore.MAGENTA+f"secondes :{total_time}")
+       #     total_time -= 1
+       #     time.sleep(1)
+#
+       # while total_time == 0 and alarm.lower()=="y":
+#
+       #     clear()
+#
+       #     
+       #     while True :
+       #         os.chdir("../my-alarms")
+       #         pygame.mixer.init()
+       #         sound=pygame.mixer.Sound(M)
+       #         sound.play()
+       #         for_off=input(Fore.BLUE+"for off enter y ... /")
+       #         if "y"==for_off.lower() :
+       #             pygame.mixer.quit()
+       #             break
+#
 
               
-    elif 'n' == choice.lower() :
-        clear()
-        break
-
-
-    
-    else:
-        print("this choice is not in choices ... /")
-        time.sleep(5)
-        clear()
-        banner()
+    #elif 'n' == choice.lower() :
+    #    clear()
+    #    break
+#
+#
+    #
+    #else:
+    #    print("this choice is not in choices ... /")
+    #    time.sleep(5)
+    #    clear()
+        
