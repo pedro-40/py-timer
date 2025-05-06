@@ -26,7 +26,7 @@ def choice() :
 
     while True :
 
-        choice = input(Fore.BLUE+"DO you want to start timer ?  (Y,n) ")
+        choice = input(Fore.BLUE+"DO you want to start timer ? (Y,n) ")
         if (
             choice.lower()=="y" or 
             choice=="") :
@@ -42,7 +42,7 @@ def choice() :
             time.sleep(3)
             clear()
     
-    choice()
+    return choice()
 
 
     
@@ -50,11 +50,11 @@ def choice() :
 
 def time_set():
 
-    time = list(input(Fore.BLUE+"Enter Time in HH:MM:SS format : "+Fore.RESET).split(":"))
+    time1 = list(input(Fore.BLUE+"Enter Time in HH:MM:SS format : "+Fore.RESET).split(":"))
 
     try:
 
-        for i in range(len(time)) : time[i] = int(time[i])
+        for i in range(len(time1)) : time1[i] = int(time1[i])
 
     except :
 
@@ -64,41 +64,70 @@ def time_set():
 
     def time_format (time) :
 
-        if len(time) != 3 :
+        if len(time1) != 3 :
             print(Fore.RED+"Entered Time is invalid\nExample valid time : 12:36:00\n"+Fore.RESET)
             return time_set() 
         
         if (
 
-            time[0] < 0 or
-            time[1] < 0 or
-            time[2] < 0 
+            time1[0] < 0 or
+            time1[1] < 0 or
+            time1[2] < 0 
         ):
             print(Fore.RED+"Entered Time is invalid\nExample valid time : 12:36:00\n"+Fore.RESET)
             return time_set() 
         
         if (
 
-            time[1] > 60 or
-            time[2] > 60 
+            time1[1] > 60 or
+            time1[2] > 60 
         ):
             print(Fore.RED+"Entered Time is invalid\nExample valid time : 12:36:00\n"+Fore.RESET)
             return time_set()
 
-    time_format(time)
+    time_format(time1)
 
     clear()
 
-    print(Fore.BLUE+f"The time you set : {time[0]}:{time[1]}:{time[2]}"+Fore.RESET)
+    print(Fore.BLUE+f"The time you set : {time1[0]}:{time1[1]}:{time1[2]} \n"+Fore.RESET)
 
-    return time
+    def alarm_choice () :
+        
+        alarm = input(Fore.BLUE+"Do you want to set an alarm? (Y/n)"+Fore.RESET)
 
+        if (
+            alarm.lower()=="y" or
+            alarm ==""
+        ):
+            alarm_set()
+
+        elif alarm.lower() == "n":
+            
+            pass
+
+        else:
+            print(Fore.RED+"this choice is not in choices "+Fore.RESET)
+
+            time.sleep(3)
+            clear()
+            alarm_choice()
+
+    alarm_choice()
+
+    return time1
+
+
+def alarm_set () :
+    
+    alarm = input(Fore.BLUE+"Do you want to set an alarm? (Y/n) "+Fore.RESET)
 
 while True:
 
     clear()
 
     choice()
+
+    alarm_set()
 
     #choice=input(Fore.RED+"Do you want to start the timer? (y/n)" )
     #if 'y' == choice.lower():
