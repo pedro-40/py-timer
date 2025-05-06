@@ -119,7 +119,26 @@ def time_set():
 
 def alarm_set () :
     
-    alarm = input(Fore.BLUE+"Do you want to set an alarm? (Y/n) "+Fore.RESET)
+    def alarm_dow () :
+
+        dirc = os.listdir()
+
+        if "my-alarms" not in dirc :
+            os.mkdir("my-alarms")
+
+        def_alarm = os.listdir("my-alarms")
+
+        if "beep1.mp3" not in def_alarm :
+            url = "https://sedatoseda.com/wp-content/uploads/Cuckoo-Clock-Alarm-Sound.mp3"
+
+            request= requests.get(url)
+            if request.status_code == 200 :
+                os.chdir("my-alarms")
+                with open('beep1.mp3', 'wb') as f:
+                    for chunk in request.iter_content(chunk_size=1024):  
+                        f.write(chunk)
+             
+    alarm_dow()    
 
 while True:
 
