@@ -117,14 +117,12 @@ def time_set():
     return time1
 
 
-def alarm_set () :
+def alarm_set () : 
     
     def alarm_dow () :
+        print(8 * 40)
 
-        dirc = os.listdir()
-
-        if "my-alarms" not in dirc :
-            os.mkdir("my-alarms")
+        os.mkdir("my-alarms")
 
         def_alarm = os.listdir("my-alarms")
 
@@ -137,8 +135,35 @@ def alarm_set () :
                 with open('beep1.mp3', 'wb') as f:
                     for chunk in request.iter_content(chunk_size=1024):  
                         f.write(chunk)
-             
-    alarm_dow()    
+
+    def cp_alarm () :
+
+        alarm_cp = input(Fore.BLUE+"Do you want to sing a song? (Y/n) "+Fore.RESET)
+
+        if (
+            alarm_cp.lower() == "y" or
+            alarm_cp == ""
+        ):
+            you = os.path.expanduser("~")
+            music_directory = os.path.join(you, "Music")
+            os.chdir(music_directory)
+            m = os.listdir()
+
+            Music_choice = input(Fore.BLUE+"Enter the name of the music (enter h for help) "+Fore.RESET)
+
+            if Music_choice.lower() == "h" :
+                for i in m :
+                    print (i)
+            
+            elif Music_choice not in m :
+                pass
+            
+
+    dirc = os.listdir()
+
+    if "my-alarms" not in dirc :
+        alarm_dow() 
+    cp_alarm()    
 
 while True:
 
