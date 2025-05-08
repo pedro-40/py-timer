@@ -120,7 +120,6 @@ def time_set():
 def alarm_set () : 
     
     def alarm_dow () :
-        print(8 * 40)
 
         os.mkdir("my-alarms")
 
@@ -140,30 +139,54 @@ def alarm_set () :
 
         alarm_cp = input(Fore.BLUE+"Do you want to sing a song? (Y/n) "+Fore.RESET)
 
-        if (
-            alarm_cp.lower() == "y" or
-            alarm_cp == ""
-        ):
+
+        def music_choice():
+
             you = os.path.expanduser("~")
             music_directory = os.path.join(you, "Music")
             os.chdir(music_directory)
             m = os.listdir()
-
             Music_choice = input(Fore.BLUE+"Enter the name of the music (enter h for help) "+Fore.RESET)
-
             if Music_choice.lower() == "h" :
-                for i in m :
-                    print (i)
+                for i in range(0, len(m)) :
+                    if i%2 == 0:
+                        print(Fore.YELLOW+f"{m[i]}"+Fore.RESET)
+                    
+                    elif i%2 != 0:
+                        print(Fore.CYAN+f"{m[i]}"+Fore.RESET)                       
+                                 
+                return music_choice()
             
             elif Music_choice not in m :
-                pass
+                print(Fore.RED+f"Not find"+Fore.RESET)
+                return music_choice() 
             
+                               
+        if (
+            alarm_cp.lower() == "y" or
+            alarm_cp == ""
+        ):
+            music_choice()
 
     dirc = os.listdir()
 
     if "my-alarms" not in dirc :
         alarm_dow() 
-    cp_alarm()    
+    cp_alarm()  
+
+
+
+def music_player() :
+
+    while True :
+        os.chdir("../my-alarms")
+        pygame.mixer.init()
+        sound=pygame.mixer.Sound(M)
+        sound.play()
+        for_off=input(Fore.BLUE+"for off enter y ... /")
+        if "y"==for_off.lower() :
+            pygame.mixer.quit()
+            break  
 
 while True:
 
